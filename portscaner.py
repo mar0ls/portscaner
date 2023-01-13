@@ -32,14 +32,11 @@ def portscan(tgtHost, tgtPorts):
         
 def parse_port_spec(spec):
     if "," in spec:
-        # Port list
         ports = spec.split(',')
     elif '-' in spec:
-        # Port range
         start, end = map(int, spec.split('-'))
         ports = range(start, end + 1)
     else:
-        # Single port
         ports = [spec]
     return map(int, ports)
 
@@ -50,7 +47,6 @@ def main():
     (options, args) = parser.parse_args()
     tgtHost = options.tgtHost
     tgtPorts = parse_port_spec(str(options.tgtPort))
-#   tgtPorts = str(options.tgtPort).split(',')
     if not options.tgtHost or not options.tgtPort:
         print(parser.usage)
         exit(0)
